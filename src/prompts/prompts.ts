@@ -17,22 +17,33 @@ export function getPrompt(role: string): string {
                 ## EXAMPLE: 
                 Here is an example of what the generated Jasmine unit test should look like:
 
-                import { MyComponent } from './my-component';
+                import { TestBed } from '@angular/core/testing';
+                import { AppComponent } from './app.component';
 
-                describe('MyComponent', () => {
-                    let component: MyComponent;
-
-                    beforeEach(() => {
-                        component = new MyComponent();
+                describe('AppComponent', () => {
+                    beforeEach(async () => {
+                        await TestBed.configureTestingModule({
+                        imports: [AppComponent],
+                        }).compileComponents();
                     });
 
-                    it('should create', () => {
-                        expect(component).toBeTruthy();
+                    it('should create the app', () => {
+                        const fixture = TestBed.createComponent(AppComponent);
+                        const app = fixture.componentInstance;
+                        expect(app).toBeTruthy();
                     });
 
-                    it('should return correct value', () => {
-                        const result = component.someMethod();
-                        expect(result).toBe('expected value');
+                    it('should have the component title', () => {
+                        const fixture = TestBed.createComponent(AppComponent);
+                        const app = fixture.componentInstance;
+                        expect(app.title).toEqual('spec-generation-ai-front');
+                    });
+
+                    it('should render title', () => {
+                        const fixture = TestBed.createComponent(AppComponent);
+                        fixture.detectChanges();
+                        const compiled = fixture.nativeElement as HTMLElement;
+                        expect(compiled.querySelector('h1')?.textContent).toContain('Hello, spec-generation-ai-front');
                     });
                 });
 

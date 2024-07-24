@@ -121,6 +121,7 @@ function generateNewFileUri(): vscode.Uri | undefined {
 	return undefined;
 }
 
+//This method is called to add an Item to the StatusBar
 function updateStatusBarItem(show: boolean): void {
 	if (show) {
 		statusBarItem.text = `$(loading~spin) Generating test file`;
@@ -128,12 +129,6 @@ function updateStatusBarItem(show: boolean): void {
 	} else {
 		statusBarItem.hide();
 	}
-}
-
-function extractCodeBlocks(code: string, language: string) {
-    const regex = new RegExp(`\`\`\`${language}[\\s\\S]*?\`\`\``, 'g');
-    const codeBlocks = code.match(regex);
-    return codeBlocks ? codeBlocks.join('\n') : '';
 }
 
 // This method is called when your extension is deactivated
